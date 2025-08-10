@@ -1,0 +1,139 @@
+/* Importa a fonte 'Poppins' do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* Variáveis de Cor (Paleta Profissional) */
+:root {
+    --primary-color: #4a69bd; /* Um azul mais elegante */
+    --sidebar-bg: #2c3a47;
+    --sidebar-link: #dcdde1;
+    --sidebar-hover: #1e272e;
+    --sidebar-active: var(--primary-color);
+    --main-bg: #f5f6fa;
+    --box-bg: #ffffff;
+    --text-color: #3d3d3d;
+    --text-light: #7f8fa6;
+    --border-color: #dfe4ea;
+    --shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-color: var(--main-bg);
+    color: var(--text-color);
+}
+
+.admin-wrapper {
+    display: flex;
+}
+
+/* --- Sidebar (Menu Lateral) --- */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-link);
+    height: 100vh;
+    padding-top: 20px;
+    position: fixed;
+    transition: transform 0.3s ease-in-out;
+}
+
+.sidebar h2 {
+    text-align: center;
+    color: white;
+    font-weight: 600;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin-top: 40px;
+}
+
+.sidebar-menu li a {
+    color: var(--sidebar-link);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaço entre o ícone e o texto */
+    padding: 15px 25px;
+    transition: all 0.2s ease-in-out;
+    border-left: 4px solid transparent;
+}
+
+.sidebar-menu li a:hover {
+    background-color: var(--sidebar-hover);
+    color: white;
+}
+
+.sidebar-menu li.active a {
+    background-color: var(--sidebar-active);
+    color: white;
+    font-weight: 600;
+    border-left: 4px solid #63a4ff;
+}
+
+.sidebar-menu li a i {
+    font-size: 1.1em;
+    width: 20px; /* Alinha os textos mesmo com ícones de larguras diferentes */
+    text-align: center;
+}
+
+/* --- Conteúdo Principal --- */
+.main-content {
+    margin-left: 250px;
+    padding: 25px;
+    width: calc(100% - 250px);
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--box-bg);
+    padding: 15px 25px;
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+.user-info { font-weight: 600; }
+.logout a { color: #e74c3c; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+.logout a:hover { color: #c0392b; }
+
+.content-box {
+    background-color: var(--box-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    text-align: left; /* Voltamos ao padrão, cada página decide seu alinhamento */
+}
+
+/* --- Responsividade --- */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-250px);
+        z-index: 1000;
+    }
+    .sidebar.show {
+        transform: translateX(0);
+    }
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 15px;
+    }
+    .menu-toggle {
+        display: block;
+    }
+}

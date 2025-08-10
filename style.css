@@ -1,0 +1,189 @@
+/* Importa as fontes do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Nunito:wght@700;800&display=swap');
+
+/* Variáveis Globais de Design */
+:root {
+    --primary-color: #E67E22; /* Laranja acolhedor */
+    --secondary-color: #34495E; /* Azul escuro para texto */
+    --light-bg: #f8f9fa;
+    --white-color: #ffffff;
+    --border-color: #dee2e6;
+    --font-heading: 'Nunito', sans-serif;
+    --font-body: 'Lato', sans-serif;
+    --shadow: 0 10px 30px rgba(0,0,0,0.07);
+    --border-radius: 12px;
+}
+
+body {
+    font-family: var(--font-body);
+    margin: 0;
+    background-color: var(--light-bg);
+    color: var(--secondary-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* --- Componentes Reutilizáveis --- */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+.btn:hover {
+    background-color: #d35400;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 2.5em;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.section-subtitle {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 50px auto;
+    color: #7f8c8d;
+}
+
+/* --- Cabeçalho e Rodapé --- */
+.public-header {
+    background-color: var(--white-color);
+    padding: 15px 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border-color);
+}
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.8em;
+    font-weight: 800;
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+.logo span {
+    color: var(--primary-color);
+}
+.main-nav a {
+    font-weight: 700;
+    color: var(--secondary-color);
+    text-decoration: none;
+    margin: 0 20px;
+    transition: color 0.2s;
+}
+.main-nav a:hover { color: var(--primary-color); }
+
+.public-footer {
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 40px;
+    background-color: var(--secondary-color);
+    color: rgba(255,255,255,0.7);
+}
+
+/* --- Página Inicial (index.php) --- */
+.hero-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.pexels.com/photos/1056251/pexels-photo-1056251.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 120px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    box-sizing: border-box;
+}
+.hero-section h1 {
+    font-family: var(--font-heading);
+    font-size: 3.5em;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+.hero-section p {
+    font-size: 1.3em;
+    max-width: 600px;
+    margin: 15px auto 30px auto;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+}
+.gallery-title {
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 2.5em;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+.animal-card {
+    background-color: var(--white-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.animal-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+.animal-card .animal-img { width: 100%; height: 220px; object-fit: cover; }
+.animal-card .animal-info { padding: 25px; text-align: center; }
+.animal-card .animal-info h3 { font-family: var(--font-heading); margin: 0 0 10px 0; font-size: 1.6em; }
+.animal-card .animal-info p { color: #7f8c8d; margin: 0 0 20px 0; }
+
+/* --- Página de Detalhes (animal.php) --- */
+.animal-detail-section {
+    margin-top: 40px;
+    background-color: var(--white-color);
+    box-shadow: var(--shadow);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 45% 55%;
+    align-items: start;
+}
+.animal-detail-img { width: 100%; height: 100%; min-height: 500px; object-fit: cover; }
+.animal-detail-info { padding: 40px; }
+.animal-detail-info h1 { font-family: var(--font-heading); font-size: 3em; margin-top: 0; color: var(--primary-color); }
+.animal-detail-info .info-table { margin: 20px 0; width: 100%; border-collapse: collapse; }
+.animal-detail-info .info-table tr { border-bottom: 1px solid var(--border-color); }
+.animal-detail-info .info-table td { padding: 12px 0; vertical-align: top; }
+.animal-detail-info .info-table td:first-child { font-weight: 700; width: 120px; padding-right: 15px; text-align: left; }
+.animal-detail-info .description { line-height: 1.8; color: #555; }
+.animal-detail-info h3 { font-family: var(--font-heading); font-size: 1.4em; margin-top: 30px; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; }
+.form-page-container, .adoption-form-container { max-width: 700px; margin: 40px auto; background-color: var(--white-color); padding: 40px; border-radius: var(--border-radius); box-shadow: var(--shadow); }
+.adoption-form-container { background-color: var(--light-bg); margin: 30px 0 0 0; }
+.form-page-container h1, .adoption-form-container h3 { text-align: center; font-family: var(--font-heading); }
+.form-page-container p { text-align: center; color: #7f8c8d; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 700; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; box-sizing: border-box; font-family: var(--font-body); font-size: 1em; }
+.form-group textarea { resize: vertical; min-height: 120px; }
+.mensagem { text-align: center; padding: 15px; border-radius: 8px; margin: 20px 0; color: white; }
+.sucesso { background-color: #27ae60; }
+.erro { background-color: #c0392b; }
