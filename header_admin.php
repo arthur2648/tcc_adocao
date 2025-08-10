@@ -1,20 +1,30 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) { session_start(); }
+// O nosso inicializador mestre garante que a sessão comece sempre da forma correta.
+require_once 'inicializar.php'; 
 require_once 'conexao.php';
+
+// A regra de segurança principal: verifica se o utilizador está logado E se o seu cargo tem permissão para estar no painel
 if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['usuario_tipo'], ['funcionario', 'gerente', 'admin', 'rh'])) {
     header("Location: login.php");
     exit();
 }
+
+// Pega os dados da sessão para usar na página
 $nome_usuario = $_SESSION['usuario_nome'];
 $tipo_usuario = $_SESSION['usuario_tipo'];
-if (!isset($pagina_atual)) { $pagina_atual = ''; }
+
+// Variável para sabermos qual página está ativa e destacar o link no menu
+if (!isset($pagina_atual)) {
+    $pagina_atual = '';
+}
 ?>
 <!DOCTYPE html>
-<html lang="pt-pt">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pagina_atual; ?> - Painel ONG</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="admin_style.css">
@@ -28,7 +38,7 @@ if (!isset($pagina_atual)) { $pagina_atual = ''; }
                 <li class="<?php if ($pagina_atual == 'Painel RH') echo 'active'; ?>"><a href="painel_rh.php"><i class="fas fa-tachometer-alt"></i> Dashboard RH</a></li>
                 <li class="<?php if ($pagina_atual == 'Gerenciar Funcionários') echo 'active'; ?>"><a href="gerenciar_funcionarios.php"><i class="fas fa-users-cog"></i> Gerir Equipa</a></li>
                 <li class="<?php if ($pagina_atual == 'Cadastrar Funcionário') echo 'active'; ?>"><a href="cadastrar_funcionario.php"><i class="fas fa-user-plus"></i> Cadastrar Funcionário</a></li>
-            <?php else: ?>
+            <?php else: // Menu do Funcionário e Gerente ?>
                 <li class="<?php if ($pagina_atual == 'Painel') echo 'active'; ?>"><a href="painel.php"><i class="fas fa-home"></i> Início</a></li>
                 <li class="<?php if ($pagina_atual == 'Gerenciar Adoções') echo 'active'; ?>"><a href="gerenciar_adocoes.php"><i class="fas fa-heart"></i> Gerir Adoções</a></li>
                 <li class="<?php if ($pagina_atual == 'Gerenciar Animais') echo 'active'; ?>"><a href="gerenciar_animais.php"><i class="fas fa-paw"></i> Gerir Animais</a></li>
@@ -50,5 +60,12 @@ if (!isset($pagina_atual)) { $pagina_atual = ''; }
         <div class="top-header">
             <button class="menu-toggle" id="menu-toggle">☰</button>
             <div class="user-info">Bem-vindo(a), <?php echo htmlspecialchars($nome_usuario); ?>! (<?php echo $tipo_usuario; ?>)</div>
-            <div class="logout"><a href="editar_perfil.php" style="margin-right: 20px; color: var(--accent-color);">Editar Perfil</a><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Sair</a></div>
+            <div class="logout">
+                <?php // ### A PEQUENA ALTERAÇÃO QUE VOCÊ PEDIU ### ?>
+                <?php // O link "Editar Perfil" só aparece se o utilizador NÃO for RH ou Admin ?>
+                <?php if (!in_array($tipo_usuario, ['rh', 'admin'])): ?>
+                    <a href="editar_perfil.php" style="margin-right: 20px; color: var(--accent-color);">Editar Perfil</a>
+                <?php endif; ?>
+                <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Sair</a>
+            </div>
         </div>
